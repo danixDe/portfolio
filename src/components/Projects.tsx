@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaGlobe, FaReact, FaNodeJs, FaMobile } from 'react-icons/fa';
-import { SiMongodb, SiExpress, SiFlutter, SiDart } from 'react-icons/si';
+import { SiMongodb, SiExpress, SiFlutter, SiDart, SiTailwindcss, SiEthereum } from 'react-icons/si';
+import { TbLayoutDashboard, TbApiApp } from "react-icons/tb";
 
 const Projects = () => {
   const projects = [
@@ -23,7 +24,7 @@ const Projects = () => {
       ],
       links: {
         live: "https://gvpblind-pi69.onrender.com/",
-        github: "https://gvpblind-pi69.onrender.com/"
+        github: "https://github.com/danixDe/Blinder/"
       }
     },
     {
@@ -48,6 +49,26 @@ const Projects = () => {
       }
     },
     {
+      title: "SolanaXchange",
+      description: "Web 3 technology for crypto phantom and solflare wallet integration, Connection and Token Generation and Transactions",
+      features: [
+        "Phantom/ Solflare Wallet Connection",
+        "Token Generation",
+        "Minting Tokens",
+        "Web 3 login",
+        "Block chain Transactions"
+      ],
+      tech: [
+        { name: "React.js", icon: FaReact },
+        { name: "Web3.js", icon: SiEthereum },
+        { name: "TailwindCss", icon: SiTailwindcss },
+        { name: "shadcn/ui", icon: TbLayoutDashboard }
+      ],
+      links: {
+        github: "https://github.com/danixDe/SolanaXchange"
+      }
+    },
+    {
       title: "AlumNet - Alumni Network",
       description: "A platform connecting college students with alumni, featuring AI-powered chatbot for enhanced interaction.",
       features: [
@@ -65,7 +86,49 @@ const Projects = () => {
       links: {
         github: "https://github.com/danixDe/sih"
       }
-    }
+    },
+    {
+      title: "Finance Tracker",
+      description: "A simple web app to track expenses, visualize spending, and manage budgets. ",
+      features: [
+        "CRUD Transactions",
+        "Monthly Expenses Chart",
+        "Category wise breakdown pie chart",
+        "Setting Budget and vs. Actual Comparision",
+        "Basic spending Insights"
+      ],
+      tech: [
+        { name: "React.js", icon: FaReact },
+        { name: "Tailwindcss", icon: SiTailwindcss },
+        { name: "shadcn/ui", icon: TbLayoutDashboard },
+        { name: "Router DOM", icon: FaReact }
+      ],
+      links: {
+        live: "https://finance-tracker-bg4y.vercel.app/",
+        github: "https://github.com/danixDe/Finance_Tracker"
+      }
+    },
+    {
+      title: "Fake Store",
+      description: "This is a responsive shopping website built using React.js and the Fake Store API as an E-Commerce Web Application",
+      features: [
+        "JWT Login",
+        "Product Listing Page",
+        "Product Details Page",
+        "Cart and Trasactions"
+      ],
+      tech: [
+        { name: "React.js", icon: FaReact },
+        { name: "Tailwindcss", icon: SiTailwindcss },
+        { name: "shadcn/ui", icon: TbLayoutDashboard },
+        { name: "Fake Store Api", icon: TbApiApp }
+      ],
+      links: {
+        live: "https://fake-stor.netlify.app/",
+        github: "https://github.com/danixDe/fake_store"
+      }
+    },
+  
   ];
 
   return (

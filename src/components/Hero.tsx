@@ -11,7 +11,7 @@ const Hero = () => {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden hero-gradient">
+    <div id = "home" className="min-h-screen flex items-center justify-center relative overflow-hidden hero-gradient">
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-cyber-black via-cyber-dark to-cyber-black opacity-90"></div>
       </div>
