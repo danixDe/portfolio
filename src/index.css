@@ -43,3 +43,25 @@
                 radial-gradient(circle at bottom left, rgba(76, 29, 149, 0.1), transparent 70%);
   }
 }
+.iphone-scroll {
+  scrollbar-width:none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.iphone-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.iphone-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.iphone-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.iphone-scroll.scrolling::-webkit-scrollbar-thumb {
+  opacity: 1;
+}

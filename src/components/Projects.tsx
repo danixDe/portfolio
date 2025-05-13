@@ -1,138 +1,96 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaGlobe, FaReact, FaNodeJs, FaMobile } from 'react-icons/fa';
-import { SiMongodb, SiExpress, SiFlutter, SiDart, SiTailwindcss, SiEthereum } from 'react-icons/si';
-import { TbLayoutDashboard, TbApiApp } from "react-icons/tb";
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import ProjectCard from './ProjectCard';
+import { projectsData } from './projectData';
 
 const Projects = () => {
-  const projects = [
-    {
-      title: "Blinder - Student Community Hub",
-      description: "An exclusive online community platform for students with college email domains, featuring real-time feed filtering and community engagement.",
-      features: [
-        "College domain email verification",
-        "Real-time feed search",
-        "Dynamic post creation",
-        "Community segmentation",
-        "Dark mode support"
-      ],
-      tech: [
-        { name: "React.js", icon: FaReact },
-        { name: "Node.js", icon: FaNodeJs },
-        { name: "Express.js", icon: SiExpress },
-        { name: "MongoDB", icon: SiMongodb }
-      ],
-      links: {
-        live: "https://gvpblind-pi69.onrender.com/",
-        github: "https://github.com/danixDe/Blinder/"
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Check scroll position to update arrow visibility
+  const handleScroll = () => {
+    if (!scrollContainerRef.current) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+
+    setShowLeftArrow(scrollLeft > 20);
+    setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 20);
+
+    // Trigger scrollbar thumb fade-in
+    setIsAnimating(true);
+    clearTimeout((handleScroll as any).timeout);
+    (handleScroll as any).timeout = setTimeout(() => setIsAnimating(false), 500);
+  };
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll);
+      return () => scrollContainer.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  const scrollTo = (direction: 'left' | 'right') => {
+    if (!scrollContainerRef.current || isAnimating) return;
+
+    setIsAnimating(true);
+
+    const container = scrollContainerRef.current;
+    const cardWidth = 370; // card width + margin
+    const scrollAmount = direction === 'left' ? -cardWidth * 2 : cardWidth * 2;
+    const currentScroll = container.scrollLeft;
+    const targetScroll = currentScroll + scrollAmount;
+
+    if (direction === 'left' && targetScroll < 0) {
+      container.scrollLeft = container.scrollWidth - container.clientWidth;
+      setTimeout(() => {
+        smoothScroll(container, container.scrollLeft - cardWidth * 2, 500);
+      }, 50);
+      return;
+    }
+
+    if (direction === 'right' && targetScroll > container.scrollWidth - container.clientWidth) {
+      container.scrollLeft = 0;
+      setTimeout(() => {
+        smoothScroll(container, cardWidth * 2, 500);
+      }, 50);
+      return;
+    }
+
+    smoothScroll(container, targetScroll, 500);
+  };
+
+  const smoothScroll = (element: HTMLElement, target: number, duration: number) => {
+    const start = element.scrollLeft;
+    const change = target - start;
+    let startTime: number | null = null;
+
+    function animateScroll(timestamp: number) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeInOutQuad = progress < 0.5
+        ? 2 * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+      element.scrollLeft = start + change * easeInOutQuad;
+
+      if (elapsed < duration) {
+        window.requestAnimationFrame(animateScroll);
+      } else {
+        setIsAnimating(false);
+        handleScroll();
       }
-    },
-    {
-      title: "AuraHP - Blood Donation Platform",
-      description: "A comprehensive blood donation platform connecting medical facilities with donors, featuring real-time notifications and location-based services.",
-      features: [
-        "Dual login system (Medical & Donor)",
-        "Real-time blood request notifications",
-        "Donation history tracking",
-        "Google Maps integration",
-        "Analytics dashboard"
-      ],
-      tech: [
-        { name: "Flutter", icon: SiFlutter },
-        { name: "Dart", icon: SiDart },
-        { name: "React.js", icon: FaReact },
-        { name: "Node.js", icon: FaNodeJs },
-        { name: "MongoDB", icon: SiMongodb }
-      ],
-      links: {
-        github: "https://github.com/danixDe/Aura"
-      }
-    },
-    {
-      title: "SolanaXchange",
-      description: "Web 3 technology for crypto phantom and solflare wallet integration, Connection and Token Generation and Transactions",
-      features: [
-        "Phantom/ Solflare Wallet Connection",
-        "Token Generation",
-        "Minting Tokens",
-        "Web 3 login",
-        "Block chain Transactions"
-      ],
-      tech: [
-        { name: "React.js", icon: FaReact },
-        { name: "Web3.js", icon: SiEthereum },
-        { name: "TailwindCss", icon: SiTailwindcss },
-        { name: "shadcn/ui", icon: TbLayoutDashboard }
-      ],
-      links: {
-        github: "https://github.com/danixDe/SolanaXchange"
-      }
-    },
-    {
-      title: "AlumNet - Alumni Network",
-      description: "A platform connecting college students with alumni, featuring AI-powered chatbot for enhanced interaction.",
-      features: [
-        "Alumni directory",
-        "AI chatbot integration",
-        "Student-alumni interaction",
-        "Profile management"
-      ],
-      tech: [
-        { name: "React.js", icon: FaReact },
-        { name: "Node.js", icon: FaNodeJs },
-        { name: "Express.js", icon: SiExpress },
-        { name: "MongoDB", icon: SiMongodb }
-      ],
-      links: {
-        github: "https://github.com/danixDe/sih"
-      }
-    },
-    {
-      title: "Finance Tracker",
-      description: "A simple web app to track expenses, visualize spending, and manage budgets. ",
-      features: [
-        "CRUD Transactions",
-        "Monthly Expenses Chart",
-        "Category wise breakdown pie chart",
-        "Setting Budget and vs. Actual Comparision",
-        "Basic spending Insights"
-      ],
-      tech: [
-        { name: "React.js", icon: FaReact },
-        { name: "Tailwindcss", icon: SiTailwindcss },
-        { name: "shadcn/ui", icon: TbLayoutDashboard },
-        { name: "Router DOM", icon: FaReact }
-      ],
-      links: {
-        live: "https://finance-tracker-bg4y.vercel.app/",
-        github: "https://github.com/danixDe/Finance_Tracker"
-      }
-    },
-    {
-      title: "Fake Store",
-      description: "This is a responsive shopping website built using React.js and the Fake Store API as an E-Commerce Web Application",
-      features: [
-        "JWT Login",
-        "Product Listing Page",
-        "Product Details Page",
-        "Cart and Trasactions"
-      ],
-      tech: [
-        { name: "React.js", icon: FaReact },
-        { name: "Tailwindcss", icon: SiTailwindcss },
-        { name: "shadcn/ui", icon: TbLayoutDashboard },
-        { name: "Fake Store Api", icon: TbApiApp }
-      ],
-      links: {
-        live: "https://fake-stor.netlify.app/",
-        github: "https://github.com/danixDe/fake_store"
-      }
-    },
-  
-  ];
+    }
+
+    window.requestAnimationFrame(animateScroll);
+  };
 
   return (
-    <section id="projects" className="py-20 px-4">
+    <section id="projects" className="py-20 px-4 relative">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -145,71 +103,46 @@ const Projects = () => {
           </span>
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card p-6 hover:shadow-neon-primary/20 transition-all duration-300"
-            >
-              <h3 className="text-2xl font-cyber font-bold mb-4 text-neon-primary">
-                {project.title}
-              </h3>
-              
-              <p className="text-gray-300 mb-4">
-                {project.description}
-              </p>
+        <div className="relative group">
+          {/* Left navigation button */}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showLeftArrow ? 1 : 0 }}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 p-2 rounded-full backdrop-blur-sm text-white/90 -ml-5 group-hover:scale-110 transition-all duration-300"
+            onClick={() => scrollTo('left')}
+            aria-label="Scroll left"
+          >
+            <FaChevronLeft size={24} />
+          </motion.button>
 
-              <div className="mb-6">
-                <h4 className="text-neon-secondary font-semibold mb-2">Key Features:</h4>
-                <ul className="list-disc list-inside space-y-1 text-gray-300">
-                  {project.features.map((feature, i) => (
-                    <li key={i}>{feature}</li>
-                  ))}
-                </ul>
-              </div>
+          {/* Scrollable container with iPhone scrollbar */}
+          <div
+            ref={scrollContainerRef}
+            className={`flex overflow-x-auto py-4 snap-x snap-mandatory iphone-scroll ${isAnimating ? 'scrolling' : ''}`}
+            style={{ scrollBehavior: 'smooth' }}
+          >
+            {projectsData.map((project, index) => (
+              <ProjectCard
+                key={index}
+                title={project.title}
+                description={project.description}
+                features={project.features}
+                tech={project.tech}
+                links={project.links}
+              />
+            ))}
+          </div>
 
-              <div className="mb-6">
-                <h4 className="text-neon-secondary font-semibold mb-2">Technologies:</h4>
-                <div className="flex flex-wrap gap-3">
-                  {project.tech.map((tech, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-1 text-gray-300"
-                    >
-                      <tech.icon className="text-neon-primary" />
-                      <span>{tech.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                {project.links.github && (
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-neon-primary hover:text-neon-secondary transition-colors"
-                  >
-                    <FaGithub /> GitHub
-                  </a>
-                )}
-                {project.links.live && (
-                  <a
-                    href={project.links.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-neon-primary hover:text-neon-secondary transition-colors"
-                  >
-                    <FaGlobe /> Live Demo
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          ))}
+          {/* Right navigation button */}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showRightArrow ? 1 : 0 }}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 p-2 rounded-full backdrop-blur-sm text-white/90 -mr-5 group-hover:scale-110 transition-all duration-300"
+            onClick={() => scrollTo('right')}
+            aria-label="Scroll right"
+          >
+            <FaChevronRight size={24} />
+          </motion.button>
         </div>
       </motion.div>
     </section>
