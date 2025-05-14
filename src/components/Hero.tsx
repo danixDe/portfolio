@@ -8,7 +8,6 @@ const Hero = () => {
     { icon: FaGithub, url: 'https://github.com/danixDe', color: 'hover:text-neon-secondary' },
     { icon: FaLinkedin, url: 'https://linkedin.com/in/arvix17', color: 'hover:text-neon-accent' },
     { icon: FaTwitter, url: 'https://twitter.com/zoro_yeag3r', color: 'hover:text-neon-highlight' },
-    {icon: FaInstagram, url:'https://instagram.com/arvix17', color: 'hover:text-neon-secondary'}
   ];
 
   return (

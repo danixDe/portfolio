@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const Contact = () => {
   const contactInfo = {
@@ -8,7 +8,9 @@ const Contact = () => {
     social: [
       { icon: FaGithub, url: 'https://github.com/danixDe', label: 'GitHub' },
       { icon: FaLinkedin, url: 'https://linkedin.com/in/arvix17', label: 'LinkedIn' },
-      { icon: FaTwitter, url: 'https://twitter.com/zoro_yeag3r', label: 'Twitter' }
+      { icon: FaTwitter, url: 'https://twitter.com/zoro_yeag3r', label: 'Twitter' },
+     {icon: FaInstagram, url:'https://instagram.com/arvix17', label: 'Insta'}
+
     ]
   };
 
