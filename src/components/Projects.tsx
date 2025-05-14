@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import ProjectCard from './ProjectCard';
-import { projectsData } from './projectData';
+import { projectsData } from './ProjectData';
 
 const Projects = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
