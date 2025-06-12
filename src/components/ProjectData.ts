@@ -1,7 +1,11 @@
 import { FaReact, FaNodeJs } from 'react-icons/fa';
 import { SiMongodb, SiExpress, SiFlutter, SiDart, SiTailwindcss, SiEthereum, SiTypescript } from 'react-icons/si';
 import { TbLayoutDashboard, TbApiApp } from "react-icons/tb";
-
+import aura from '../assets/aura.png'
+import fin from '../assets/finance.png'
+import sol from '../assets/solana.png'
+import store from '../assets/store.png'
+import blind from '../assets/blind.png'
 export interface Project {
   title: string;
   description: string;
@@ -11,6 +15,7 @@ export interface Project {
     live?: string;
     github?: string;
   };
+  image: string;
 }
 
 export const projectsData: Project[] = [
@@ -33,10 +38,11 @@ export const projectsData: Project[] = [
     links: {
       live: "https://gvpblind-pi69.onrender.com/",
       github: "https://github.com/danixDe/Blinder/"
-    }
+    },
+    image: blind,
   },
   {
-    title: "SolanaXchange",
+    title: "MintBridge",
     description: "A dApp for Solana Devnet Web 3 technology for phantom and solflare crypto wallet integration, Connection and Token Generation, Minting and Transactions",
     features: [
       "Phantom/ Solflare Wallet Connection",
@@ -55,7 +61,8 @@ export const projectsData: Project[] = [
     links: {
       live: " https://token-mint-alpha.vercel.app/",
       github: "https://github.com/danixDe/SolanaXchange"
-    }
+    },
+    image: sol,
   },
   {
     title: "AuraHP - Blood Donation Platform",
@@ -75,8 +82,9 @@ export const projectsData: Project[] = [
       { name: "MongoDB", icon: SiMongodb }
     ],
     links: {
-      github: "https://github.com/danixDe/Aura"
-    }
+      github: "https://github.com/bharadwaj-dasari/Aura"
+    },
+    image:aura,
   },
   {
     title: "AlumNet - Alumni Network",
@@ -95,7 +103,8 @@ export const projectsData: Project[] = [
     ],
     links: {
       github: "https://github.com/danixDe/sih"
-    }
+    },
+    image: '',
   },
   {
     title: "Finance Tracker",
@@ -116,7 +125,8 @@ export const projectsData: Project[] = [
     links: {
       live: "https://finance-tracker-bg4y.vercel.app/",
       github: "https://github.com/danixDe/Finance_Tracker"
-    }
+    },
+    image: fin,
   },
   {
     title: "Fake Store",
@@ -136,6 +146,7 @@ export const projectsData: Project[] = [
     links: {
       live: "https://fake-stor.netlify.app/",
       github: "https://github.com/danixDe/fake_store"
-    }
+    },
+    image: store,
   },
 ];

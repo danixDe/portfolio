@@ -103,7 +103,7 @@ const Projects = () => {
           </span>
         </h2>
 
-        <div className="relative group">
+        <div className="relative">
           {/* Left navigation button */}
           <motion.button
             initial={{ opacity: 0 }}
@@ -122,6 +122,7 @@ const Projects = () => {
             style={{ scrollBehavior: 'smooth' }}
           >
             {projectsData.map((project, index) => (
+            <div key ={index} className='group'>
               <ProjectCard
                 key={index}
                 title={project.title}
@@ -129,7 +130,9 @@ const Projects = () => {
                 features={project.features}
                 tech={project.tech}
                 links={project.links}
+                image = {project.image}
               />
+            </div>
             ))}
           </div>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import meta from '../assets/meta.png'
 
 const Certifications = () => {
   const certifications = [
@@ -8,7 +9,6 @@ const Certifications = () => {
       issuer: "Coursera",
       date: "May 2025",
       credentialLink: "https://www.coursera.org/account/accomplishments/professional-cert/Q17GQIEF1CLD",
-      image: "https://unsplash.com/photos/a-white-square-with-a-blue-logo-on-it-WfcHl9YfTyQ/300x192",
     }
   ];
 
@@ -38,7 +38,7 @@ const Certifications = () => {
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="md:w-1/3">
                   <img
-                    src={cert.image}
+                    src={meta}
                     alt={cert.title}
                     className="w-full h-48 object-cover rounded-lg shadow-lg"
                   />

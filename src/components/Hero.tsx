@@ -30,11 +30,11 @@ const Hero = () => {
             transition={{ delay: 0.5 }}
           >
             <span className="text-white">
-              Hello, I'm 
+              Hey, I'm 
             </span>
             <br className="md:hidden" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-neon-secondary to-neon-accent">
-              &nbsp;Aravind
+              &nbsp;Aravind Bollapragada
             </span>
           </motion.h1>
           
