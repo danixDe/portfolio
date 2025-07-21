@@ -6,6 +6,7 @@ import fin from '../assets/finance.png'
 import sol from '../assets/solana.png'
 import store from '../assets/store.png'
 import blind from '../assets/blind.png'
+import notes from '../assets/notes.png'
 export interface Project {
   title: string;
   description: string;
@@ -19,28 +20,7 @@ export interface Project {
 }
 
 export const projectsData: Project[] = [
-  {
-    title: "Blinder - Student Community Hub",
-    description: "An exclusive online community platform for students with college email domains, featuring real-time feed filtering and community engagement.",
-    features: [
-      "College domain email verification",
-      "Real-time feed search",
-      "Dynamic post creation",
-      "Community segmentation",
-      "Dark mode support"
-    ],
-    tech: [
-      { name: "React.js", icon: FaReact },
-      { name: "Node.js", icon: FaNodeJs },
-      { name: "Express.js", icon: SiExpress },
-      { name: "MongoDB", icon: SiMongodb }
-    ],
-    links: {
-      live: "https://gvpblind-pi69.onrender.com/",
-      github: "https://github.com/danixDe/Blinder/"
-    },
-    image: blind,
-  },
+
   {
     title: "MintBridge",
     description: "A dApp for Solana Devnet Web 3 technology for phantom and solflare crypto wallet integration, Connection and Token Generation, Minting and Transactions",
@@ -63,6 +43,48 @@ export const projectsData: Project[] = [
       github: "https://github.com/danixDe/SolanaXchange"
     },
     image: sol,
+  },
+    {
+    title: "Blinder - Student Community Hub",
+    description: "An exclusive online community platform for students with college email domains, featuring real-time feed filtering and community engagement.",
+    features: [
+      "College domain email verification",
+      "Real-time feed search",
+      "Dynamic post creation",
+      "Community segmentation",
+      "Dark mode support"
+    ],
+    tech: [
+      { name: "React.js", icon: FaReact },
+      { name: "Node.js", icon: FaNodeJs },
+      { name: "Express.js", icon: SiExpress },
+      { name: "MongoDB", icon: SiMongodb }
+    ],
+    links: {
+      live: "https://gvpblind-pi69.onrender.com/",
+      github: "https://github.com/danixDe/Blinder/"
+    },
+    image: blind,
+  },
+    {
+    title: "Note.io - Youtube Video Summarizer",
+    description: "A web application which takes the youtube link and returns the summary for it.[UNDER WORK]",
+    features: [
+      "Summarization Of transcript",
+      "Dynamic Transcript Extraction",
+      "Dark mode support"
+    ],
+    tech: [
+      { name: "Next.js", icon: FaReact },
+      { name: "Node.js", icon: FaNodeJs },
+      { name: "Express.js", icon: SiExpress },
+      { name: "TypeScript", icon: SiTypescript}
+    ],
+    links: {
+      live: "https://yt-notes-gamma.vercel.app/",
+      github: "https://github.com/danixDe/YT-Notes/"
+    },
+    image: notes,
   },
   {
     title: "AuraHP - Blood Donation Platform",
