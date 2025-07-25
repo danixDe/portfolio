@@ -1,151 +1,65 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import ProjectCard from './ProjectCard';
 import { projectsData } from './ProjectData';
 
 const Projects = () => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  // Check scroll position to update arrow visibility
-  const handleScroll = () => {
-    if (!scrollContainerRef.current) return;
-
-    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-
-    setShowLeftArrow(scrollLeft > 20);
-    setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 20);
-
-    // Trigger scrollbar thumb fade-in
-    setIsAnimating(true);
-    clearTimeout((handleScroll as any).timeout);
-    (handleScroll as any).timeout = setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll);
-      return () => scrollContainer.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
-
-  const scrollTo = (direction: 'left' | 'right') => {
-    if (!scrollContainerRef.current || isAnimating) return;
-
-    setIsAnimating(true);
-
-    const container = scrollContainerRef.current;
-    const cardWidth = 370; // card width + margin
-    const scrollAmount = direction === 'left' ? -cardWidth * 2 : cardWidth * 2;
-    const currentScroll = container.scrollLeft;
-    const targetScroll = currentScroll + scrollAmount;
-
-    if (direction === 'left' && targetScroll < 0) {
-      container.scrollLeft = container.scrollWidth - container.clientWidth;
-      setTimeout(() => {
-        smoothScroll(container, container.scrollLeft - cardWidth * 2, 500);
-      }, 50);
-      return;
-    }
-
-    if (direction === 'right' && targetScroll > container.scrollWidth - container.clientWidth) {
-      container.scrollLeft = 0;
-      setTimeout(() => {
-        smoothScroll(container, cardWidth * 2, 500);
-      }, 50);
-      return;
-    }
-
-    smoothScroll(container, targetScroll, 500);
-  };
-
-  const smoothScroll = (element: HTMLElement, target: number, duration: number) => {
-    const start = element.scrollLeft;
-    const change = target - start;
-    let startTime: number | null = null;
-
-    function animateScroll(timestamp: number) {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easeInOutQuad = progress < 0.5
-        ? 2 * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
-      element.scrollLeft = start + change * easeInOutQuad;
-
-      if (elapsed < duration) {
-        window.requestAnimationFrame(animateScroll);
-      } else {
-        setIsAnimating(false);
-        handleScroll();
-      }
-    }
-
-    window.requestAnimationFrame(animateScroll);
-  };
-
   return (
-    <section id="projects" className="py-20 px-4 relative">
+    <section id="projects" className="py-32 px-4 relative z-20 min-h-[800px]">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
         className="container mx-auto"
       >
-        <h2 className="text-4xl font-cyber font-bold mb-12 text-center">
+        <h2 className="text-4xl font-cyber font-bold text-center mb-16">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-neon-primary to-neon-secondary">
             Featured Projects
           </span>
         </h2>
-
-        <div className="relative">
-          {/* Left navigation button */}
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: showLeftArrow ? 1 : 0 }}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 p-2 rounded-full backdrop-blur-sm text-white/90 -ml-5 group-hover:scale-110 transition-all duration-300"
-            onClick={() => scrollTo('left')}
-            aria-label="Scroll left"
-          >
-            <FaChevronLeft size={24} />
-          </motion.button>
-
-          {/* Scrollable container with iPhone scrollbar */}
-          <div
-            ref={scrollContainerRef}
-            className={`flex overflow-x-auto py-4 snap-x snap-mandatory iphone-scroll ${isAnimating ? 'scrolling' : ''}`}
-            style={{ scrollBehavior: 'smooth' }}
-          >
-            {projectsData.map((project, index) => (
-            <div key ={index} className='group'>
-              <ProjectCard
-                key={index}
-                title={project.title}
-                description={project.description}
-                features={project.features}
-                tech={project.tech}
-                links={project.links}
-                image = {project.image}
+        <div className="relative flex flex-col gap-16 before:content-[''] before:absolute before:left-8 before:top-10 before:bottom-10 before:w-1 before:bg-gradient-to-b before:from-neon-primary before:to-neon-secondary">
+          {projectsData.map((project, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ y: -8, scale: 1.02, boxShadow: '0 8px 32px 0 rgba(129,230,217,0.15)' }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              className="relative flex flex-row items-center bg-cyber-dark rounded-2xl shadow-lg overflow-hidden min-h-[300px] pl-20"
+            >
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 bg-neon-primary rounded-full border-4 border-cyber-dark z-10"></span>
+              <img
+                src={project.image}
+                alt={project.title}
+                className="h-full min-h-[300px] w-72 object-cover flex-shrink-0"
               />
-            </div>
-            ))}
-          </div>
-
-          {/* Right navigation button */}
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: showRightArrow ? 1 : 0 }}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 p-2 rounded-full backdrop-blur-sm text-white/90 -mr-5 group-hover:scale-110 transition-all duration-300"
-            onClick={() => scrollTo('right')}
-            aria-label="Scroll right"
-          >
-            <FaChevronRight size={24} />
-          </motion.button>
+              <div className="flex-1 flex flex-col gap-2 p-8">
+                <h3 className="text-2xl font-cyber font-bold text-neon-primary mb-2">{project.title}</h3>
+                <p className="text-gray-300 mb-2">{project.description}</p>
+                <div className="mb-2">
+                  <span className="text-neon-secondary font-semibold">Key Features:</span>
+                  <ul className="list-disc list-inside text-gray-400 ml-4">
+                    {project.features.map((feature, i) => (
+                      <li key={i}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex flex-wrap gap-3 mb-2">
+                  {project.tech.map((t, i) => (
+                    <span key={i} className="flex items-center gap-1 text-gray-300 bg-cyber-black px-2 py-1 rounded-md text-sm">
+                      <t.icon className="text-lg" />
+                      {t.name}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex gap-4 mt-2">
+                  {project.links.github && (
+                    <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-neon-primary hover:text-neon-secondary font-bold underline">GitHub</a>
+                  )}
+                  {project.links.live && (
+                    <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="text-neon-accent hover:text-neon-secondary font-bold underline">Live</a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
     </section>

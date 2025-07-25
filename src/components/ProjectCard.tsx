@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaGlobe } from 'react-icons/fa';
 
@@ -29,6 +29,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   links,
   image,
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   const handleCardClick = () => {
     if (links?.live) {
       window.open(links.live, '_blank', 'noopener,noreferrer');
@@ -43,22 +45,26 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <motion.div
       onClick={handleCardClick}
       whileHover={{
-        scale: 1.02,
-        boxShadow: '0 0 15px rgba(129, 230, 217, 0.3)',
+        scale: 1.10,
+        zIndex: 50,
+        boxShadow: '0 8px 32px 0 rgba(129,230,217,0.25)',
       }}
-      className="relative group glass-card p-6 min-w-[360px] w-[400px] h-[780px] flex flex-col transition-all duration-300 mx-2 snap-center overflow-hidden"
+      className={`relative glass-card p-6 min-w-[360px] w-[400px] h-[780px] flex flex-col transition-all duration-300 mx-2 snap-center overflow-visible`}
+      style={{ willChange: 'transform', zIndex: isHovered ? 50 : 'auto' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Top Image Section */}
       <div className="relative w-full h-56 mb-4 rounded-md overflow-hidden">
         <img
           src={image}
           alt={`${title} preview`}
-          className="w-full h-full object-cover rounded-md transition-all duration-300 group-hover:blur-sm"
+          className={`w-full h-full object-cover rounded-md transition-all duration-300 ${isHovered ? 'blur-sm' : ''}`}
         />
 
         {/* Icons appear centered in the image only on hover */}
         <div
-          className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+          className={`absolute inset-0 flex items-center justify-center gap-4 transition-opacity duration-300 z-10 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
           onClick={stopPropagation}
         >
           {links.github && (
