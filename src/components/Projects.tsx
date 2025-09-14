@@ -22,14 +22,14 @@ const Projects = () => {
               key={index}
               whileHover={{ y: -8, scale: 1.02, boxShadow: '0 8px 32px 0 rgba(129,230,217,0.15)' }}
               transition={{ type: 'spring', stiffness: 300 }}
-              className="relative flex flex-row items-center bg-cyber-dark rounded-2xl shadow-lg overflow-hidden min-h-[300px] pl-20"
-            >
+              className="relative flex flex-col md:flex-row items-center bg-cyber-dark rounded-2xl shadow-lg overflow-hidden min-h-[300px] pl-20 p-10"
+  >
               <span className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 bg-neon-primary rounded-full border-4 border-cyber-dark z-10"></span>
               <img
                 src={project.image}
                 alt={project.title}
-                className="h-full min-h-[300px] w-72 object-cover flex-shrink-0"
-              />
+                className="w-full md:w-72 h-60 md:h-full object-cover flex-shrink-0"
+                  />
               <div className="flex-1 flex flex-col gap-2 p-8">
                 <h3 className="text-2xl font-cyber font-bold text-neon-primary mb-2">{project.title}</h3>
                 <p className="text-gray-300 mb-2">{project.description}</p>

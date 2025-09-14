@@ -23,8 +23,6 @@ const skills = [
   { name: 'Vite', icon: SiVite, color: '#646CFF' },
   { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169E1' },
   { name: 'Linux', icon: SiLinux, color: '#FCC624' },
-  { name: 'TensorFlow', icon: SiTensorflow, color: '#FF6F00' },
-  { name: 'scikit-learn', icon: SiScikitlearn, color: '#F7931E' },
   { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
   { name: 'Figma', icon: SiFigma, color: '#F24E1E' },
 ];

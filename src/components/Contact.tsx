@@ -8,8 +8,7 @@ const Contact = () => {
     social: [
       { icon: FaGithub, url: 'https://github.com/danixDe', label: 'GitHub' },
       { icon: FaLinkedin, url: 'https://linkedin.com/in/arvix17', label: 'LinkedIn' },
-      { icon: FaTwitter, url: 'https://twitter.com/zoro_yeag3r', label: 'Twitter' },
-     {icon: FaInstagram, url:'https://instagram.com/arvix17', label: 'Insta'}
+      { icon: FaTwitter, url: 'https://twitter.com/Aravind0x', label: 'Twitter' },
 
     ]
   };
