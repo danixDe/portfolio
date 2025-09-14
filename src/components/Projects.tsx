@@ -22,7 +22,7 @@ const Projects = () => {
               key={index}
               whileHover={{ y: -8, scale: 1.02, boxShadow: '0 8px 32px 0 rgba(129,230,217,0.15)' }}
               transition={{ type: 'spring', stiffness: 300 }}
-              className="relative flex flex-col md:flex-row items-center bg-cyber-dark rounded-2xl shadow-lg overflow-hidden min-h-[300px] pl-20 p-10"
+              className="relative flex flex-col md:flex-row items-center bg-cyber-dark rounded-2xl shadow-lg overflow-hidden min-h-[300px] pl-20 p-10 md:p-0 md:pl-20"
   >
               <span className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 bg-neon-primary rounded-full border-4 border-cyber-dark z-10"></span>
               <img
