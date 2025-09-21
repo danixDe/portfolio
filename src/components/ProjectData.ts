@@ -104,7 +104,7 @@ export const projectsData: Project[] = [
       { name: "MongoDB", icon: SiMongodb }
     ],
     links: {
-      github: "https://github.com/bharadwaj-dasari/Aura"
+      github: "https://github.com/danixDe/Aura-web"
     },
     image:aura,
   },
