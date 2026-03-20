@@ -1,5 +1,5 @@
 import React from 'react';
-import arvix from '../assets/arvix.jpg';
+import arvix from '../assets/arvix.jpeg';
 
 const About = () => (
   <section id="about" className="py-20 bg-cyber-black">
